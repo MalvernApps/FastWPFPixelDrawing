@@ -93,17 +93,18 @@ namespace WpfApp7
                     pBackBuffer += row * writeableBitmap.BackBufferStride;
                     pBackBuffer += column * 4;
 
+
                     count++;
-                    count %= 255;
+                    count %= 360;
 
                     HSVClass c = new HSVClass();
                     HSV datq = new HSV(count, 1.0, 1.0);
                     RGB value = c.HSVToRGB(datq);
 
                     // Compute the pixel's color.
-                    int color_data = 255 << value.R; // R
-                    color_data |= 128 << value.G;   // G
-                    color_data |= 255 << value.B;   // B
+                    int color_data = value.R << 16; // R
+                    color_data |= value.G << 8;   // G
+                    color_data |= value.B << 0;   // B
 
                     // Assign the color data to the pixel.
                     *((int*)pBackBuffer) = color_data;
