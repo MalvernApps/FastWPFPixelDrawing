@@ -63,7 +63,7 @@ namespace WpfApp7
             i.MouseRightButtonDown +=
                 new MouseButtonEventHandler(i_MouseRightButtonDown);
 
-            w.MouseWheel += new MouseWheelEventHandler(w_MouseWheel);
+            //w.MouseWheel += new MouseWheelEventHandler(w_MouseWheel);
 
             // Application app = new Application();
             // app.Run();
@@ -144,7 +144,7 @@ namespace WpfApp7
             }
         }
 
-        static void w_MouseWheel(object sender, MouseWheelEventArgs e)
+         void myMouseWheel(object sender, MouseWheelEventArgs e)
         {
             System.Windows.Media.Matrix m = i.RenderTransform.Value;
 
