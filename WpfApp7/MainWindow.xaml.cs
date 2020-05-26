@@ -159,8 +159,10 @@ namespace WpfApp7
         {
             System.Windows.Media.Matrix m = i.RenderTransform.Value;
 
+            // zooms in and out
             if (e.Delta > 0)
             {
+
                 m.ScaleAt(
                     1.5,
                     1.5,
@@ -175,6 +177,9 @@ namespace WpfApp7
                     e.GetPosition(w).X,
                     e.GetPosition(w).Y);
             }
+
+            // attempts a tranform
+            //m.Translate(0, 1);
 
             i.RenderTransform = new MatrixTransform(m);
         }
