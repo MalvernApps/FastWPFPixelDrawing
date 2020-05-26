@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using WpfControlLibrary1;
 
 // Code based upon
 // https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.imaging.writeablebitmap?redirectedfrom=MSDN&view=netcore-3.1
@@ -69,6 +70,8 @@ namespace WpfApp7
             // app.Run();
         }
 
+        static double count = 0;
+
         // The DrawPixel method updates the WriteableBitmap by using
         // unsafe code to write a pixel into the back buffer.
         static void DrawPixel(MouseEventArgs e)
@@ -90,10 +93,17 @@ namespace WpfApp7
                     pBackBuffer += row * writeableBitmap.BackBufferStride;
                     pBackBuffer += column * 4;
 
+                    count++;
+                    count %= 255;
+
+                    HSVClass c = new HSVClass();
+                    HSV datq = new HSV(count, 1.0, 1.0);
+                    RGB value = c.HSVToRGB(datq);
+
                     // Compute the pixel's color.
-                    int color_data = 255 << 16; // R
-                    color_data |= 128 << 8;   // G
-                    color_data |= 255 << 0;   // B
+                    int color_data = 255 << value.R; // R
+                    color_data |= 128 << value.G;   // G
+                    color_data |= 255 << value.B;   // B
 
                     // Assign the color data to the pixel.
                     *((int*)pBackBuffer) = color_data;
